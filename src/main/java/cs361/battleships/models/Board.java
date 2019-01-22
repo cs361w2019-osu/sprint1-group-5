@@ -37,6 +37,7 @@ public class Board {
 				res.setResult(AtackStatus.INVALID);
 				res.setLocation(null);
 				res.setShip(null);
+				attackList.add(res);
 				return res;
 			}
 		}
@@ -85,6 +86,7 @@ public class Board {
 		if(sinkCount == enemy.getShips().size())
 			res.setResult(AtackStatus.SURRENDER);
 
+		attackList.add(res);
 		return res;
 	}
 
