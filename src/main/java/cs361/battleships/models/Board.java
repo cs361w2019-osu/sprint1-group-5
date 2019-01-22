@@ -15,9 +15,14 @@ public class Board {
 		// TODO Implement
 	}
 
+	//setter for enemy
+	public void setEnemy(Board enemy) {
+		this.enemy = enemy;
+	}
+
 	/*
-	DO NOT change the signature of this method. It is used by the grading scripts.
-	 */
+        DO NOT change the signature of this method. It is used by the grading scripts.
+         */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
 		// TODO Implement
 		return false;
@@ -35,7 +40,8 @@ public class Board {
 		{
 			if (attackList.get(i).getLocation().getRow() == x && attackList.get(i).getLocation().getColumn() == y) {
 				res.setResult(AtackStatus.INVALID);
-				res.setLocation(null);
+				Square loc = new Square(x, y);
+				res.setLocation(loc);
 				res.setShip(null);
 				attackList.add(res);
 				return res;
@@ -68,6 +74,13 @@ public class Board {
 				}
 
 			}
+		}
+		else if(res.getResult().equals(AtackStatus.MISS))
+		{
+			Square loc = new Square(x,y);
+			res.setLocation(loc);
+			res.setShip(null);
+			return res;
 		}
 		if(shipHitCount == res.getShip().getOccupiedSquares().size())
 			res.setResult(AtackStatus.SUNK);

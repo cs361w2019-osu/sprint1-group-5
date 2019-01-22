@@ -4,6 +4,7 @@ public class Result {
 
 	private AtackStatus result;
 	private Ship ship;
+	private Square loc;
 
 
 	public AtackStatus getResult() {
@@ -24,10 +25,11 @@ public class Result {
 
 	public Square getLocation() {
 		//TODO implement
-		return null;
+		return loc;
 	}
 
 	public void setLocation(Square square) {
 		//TODO implement
+		loc = square;
 	}
 }
