@@ -8,16 +8,243 @@ public class Board {
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
+	private List<Ship> ships;
+	private List<Square> placedTiles;
 	public Board() {
-		// TODO Implement
+		ships = new ArrayList<>();
+		placedTiles = new ArrayList<>();
 	}
 
+	public void setReservedTiles(Square tile){
+		this.placedTiles.add(tile);
+	}
+
+	public List<Square> getReservedTiles() {
+		return this.placedTiles;
+	}
+	public boolean canPlaceShip ( Square tile){
+
+		for (int i = 0; i < getReservedTiles().size(); i++){
+			if (getReservedTiles().get(i).equals(tile)){
+				return false;
+			}
+		}
+		return true;
+	}
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		// TODO Implement
-		return false;
+		int y2 = y - 65;
+		//new square
+		Square tile1 = new Square();
+		//set new square
+		tile1.setRow(x);
+		tile1.setColumn(y);
+
+		if(ship.name.equals("Minesweeper")){
+			if (isVertical) {
+				if (0 <= x && x <= 9 && 0 <= y2 && 8 >= y) {
+					if (this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x);
+					y = (char) (y + 1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					System.out.printf("Battleship placed at x: %d y: %c.", x, y);
+					return true;
+				} else {
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+			else{
+				if(0 <= x && x <= 8 && 0 <= y2 && 9 >= y ){
+					// add position to list
+					if(this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x+1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					System.out.printf("Battleship origin placed at x: %d y: %c.", x,y);
+					return true;
+				}
+				else{
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+		}
+		else if(ship.name.equals("Destroyer")){
+			if (isVertical) {
+				if (0 <= x && x <= 9 && 0 <= y2 && 7 >= y) {
+					// add position to list
+					if (this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x);
+					y = (char) (y + 1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					Square tile3 = new Square();
+					tile3.setRow(x);
+					y = (char)(y2 + 2);
+					tile3.setColumn(y);
+					if(this.canPlaceShip(tile3)){
+						ship.setOccupiedSquares(tile3);
+						this.setReservedTiles(tile3);
+					}
+
+					System.out.printf("Battleship origin placed at x: %d y: %c.", x, y);
+					return true;
+				} else {
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+			else{
+				if(0 <= x && x <= 7 && 0 <= y2 && 9 >= y ){
+					// add position to list
+					if(this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x+1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					Square tile3 = new Square();
+					tile3.setRow(x+2);
+					tile3.setColumn(y);
+					if(this.canPlaceShip(tile3)) {
+						ship.setOccupiedSquares(tile3);
+						this.setReservedTiles(tile3);
+					}
+
+					System.out.printf("Battleship placed at x: %d y: %c.", x,y);
+					return true;
+				}
+				else{
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+		}
+		else if(ship.name.equals("Battleship")){
+			if (isVertical) {
+				if (0 <= x && x <= 9 && 0 <= y2 && 6 >= y) {
+					// add position to list
+					if (this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x);
+					y = (char) (y + 1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					Square tile3 = new Square();
+					tile3.setRow(x);
+					y = (char)(y2 + 2);
+					tile3.setColumn(y);
+					if(this.canPlaceShip(tile3)){
+						ship.setOccupiedSquares(tile3);
+						this.setReservedTiles(tile3);
+					}
+
+					Square tile4 = new Square();
+					tile4.setRow(x);
+					y = (char)(y2 + 2);
+					tile4.setColumn(y);
+					if(this.canPlaceShip(tile4)){
+						ship.setOccupiedSquares(tile4);
+						this.setReservedTiles(tile4);
+					}
+					System.out.printf("Battleship placed at x: %d y: %c.", x, y);
+					return true;
+				} else {
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+			else{
+				if(0 <= x && x <= 6 && 0 <= y2 && 9 >= y ){
+					// add position to list
+					if(this.canPlaceShip(tile1)){
+						ship.setOccupiedSquares(tile1);
+						this.setReservedTiles(tile1);
+					}
+
+					Square tile2 = new Square();
+					tile2.setRow(x+1);
+					tile2.setColumn(y);
+					if(this.canPlaceShip(tile2)){
+						ship.setOccupiedSquares(tile2);
+						this.setReservedTiles(tile2);
+					}
+
+					Square tile3 = new Square();
+					tile3.setRow(x+2);
+					tile3.setColumn(y);
+					if(this.canPlaceShip(tile3)) {
+						ship.setOccupiedSquares(tile3);
+						this.setReservedTiles(tile3);
+					}
+
+					Square tile4 = new Square();
+					tile4.setRow(x+3);
+					tile4.setColumn(y);
+					if(this.canPlaceShip(tile4)){
+						ship.setOccupiedSquares(tile4);
+						this.setReservedTiles(tile4);
+					}
+
+					System.out.printf("Battleship origin placed at x: %d y: %c.", x,y);
+					return true;
+				}
+				else{
+					System.out.print("Battleship cannot be placed here.");
+					return false;
+				}
+			}
+		}
+		else{
+			System.out.print("No ship selected.");
+			return false;
+		}
 	}
 
 	/*
@@ -29,12 +256,11 @@ public class Board {
 	}
 
 	public List<Ship> getShips() {
-		//TODO implement
-		return null;
+		return this.ships;
 	}
 
-	public void setShips(List<Ship> ships) {
-		//TODO implement
+	public void setShips(Ship ship) {
+		this.ships.add(ship);
 	}
 
 	public List<Result> getAttacks() {
