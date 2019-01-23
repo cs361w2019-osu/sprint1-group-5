@@ -49,18 +49,22 @@ public class Game {
         return true;
     }
 
-    private char randCol() {
-        // TODO implement
-        return 'X';
+    private char randCol(){
+        int random = (int)(Math.random() * 9);
+        char[] col = {'A','B','C','D','E','F','G','H','I','J'};
+        return col[random];
     }
 
     private int randRow() {
-        // TODO implement
-        return 0;
+        int random = (int)(Math.random() * 9);
+        return random + 1;
     }
 
     private boolean randVertical() {
-        // TODO implement
-        return false;
+        int random = (int)(Math.random());
+        if (random == 0)
+            return false;
+        else
+            return true;
     }
 }
