@@ -190,5 +190,6 @@
             <version>${ninja.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 </project>
