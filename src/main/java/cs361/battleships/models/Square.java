@@ -14,6 +14,13 @@ public class Square {
 		this.column = column;
 	}
 
+	public boolean equals(Square tile){
+		if (this.getColumn() == tile.getColumn() && this.getRow() == tile.getRow()){
+			return true;
+		}
+		else { return false; }
+	}
+
 	public char getColumn() {
 		return column;
 	}

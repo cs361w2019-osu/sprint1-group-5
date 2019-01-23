@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
+	 String name;
 
 	@JsonProperty private List<Square> occupiedSquares;
 
@@ -14,11 +15,22 @@ public class Ship {
 	}
 	
 	public Ship(String kind) {
-		//TODO implement
+		this.name = kind;
+	}
+
+	public String getShipName(Ship ship){
+		return ship.name;
+	}
+
+	public void setShipName(String name, Ship ship){
+		ship.name = name;
+	}
+
+	public void setOccupiedSquares(Square tile){
+		this.occupiedSquares.add(tile);
 	}
 
 	public List<Square> getOccupiedSquares() {
-		//TODO implement
-		return null;
+		return this.occupiedSquares;
 	}
 }
