@@ -17,9 +17,11 @@ public class Ship {
 	public Ship(String kind) {
 		this.name = kind;
 	}
+
 	public String getShipName(Ship ship){
 		return ship.name;
 	}
+
 	public void setShipName(String name, Ship ship){
 		ship.name = name;
 	}
