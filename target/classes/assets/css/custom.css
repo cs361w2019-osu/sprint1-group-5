@@ -1,41 +1,99 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
+body{
+    font-family: stencil-std, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    background-image: url(ocean.png);
+}
+#title{
+    position: relative;
+    left: 24%;
+    margin: 6px;
+}
+#place_minesweeper{
+    background: rgba(100, 100, 100, 0);
+    margin-left: 8px;
+}
+#place_destroyer{
+    background: rgba(100, 100, 100, 0);
+    margin-left: -15px;
+}
+#place_battleship{
+    background: rgba(100, 100, 100, 0);
+    margin-left: -40px;
+}
+#ships{
+    position: absolute;
+    left: 55%;
+    bottom: 15%;
+}
+#place_ships{
+    margin-left: -30px;
+}
+#minesweeper{
+    margin-left: 28px;
+}
+#destroyer{
+    margin-left: 48px;
+}
+#battleship{
+    margin-left: 50px;
+}
+button{
+    border: none;
+    display: block;
+}
 .battleGrid {
     border: 1px solid black;
     border-spacing: 0px;
+    position: relative;
+    left: 25%;
 }
-
+#opponent{
+    margin-bottom: 5px;
+}
+#player{
+    margin-top: 5px;
+}
+table{
+    background: rgba(0, 0, 0, .35);
+    background-repeat: no-repeat;
+}
 .battleGrid tr {
-    border: 1px solid black;
-    height: 30px;
+    opacity: 1;
+    border: 1px solid white;
+    height: 32px;
 }
 
 .battleGrid td {
-    border: 1px solid black;
-    width: 30px;
+    opacity: 1;
+    border: 1px solid white;
+    width: 32px;
 }
 
 td:hover {
-    background-color: gray;
+    background-color: ghostwhite;
 }
 
 .placed {
-    background-color: gray;
+    background-color: ghostwhite;
 }
 
 .occupied {
-    background-color: black;
+    background-color: ghostwhite;
 }
 
-.hit {
-    background-color: orange;
+.hit {background: rgba(0, 255, 0, 0.65);
 }
 
 .sink {
-    background-color: red;
+    background: rgba(0,0,255,.5);
 }
 
 .miss {
-    background-color: blue;
+    background: rgba(255,0,0,.65);
 }
+footer{opacity: 0}

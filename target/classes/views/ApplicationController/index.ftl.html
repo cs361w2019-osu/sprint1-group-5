@@ -2,20 +2,27 @@
 <@layout.myLayout "Home page">    
 
 
-<h1>The Battleship game</h1>
+<h1 id="title">The Battleship game</h1>
 
-<table id="opponent" class="battleGrid">
-</table>
+<div id="grid_opp_bg">
+    <table id="opponent" class="battleGrid">
+    </table>
+</div>
+<div id="grid_player_bg">
+    <table id="player" class="battleGrid">
+    </table>
+</div>
 
-<table id="player" class="battleGrid">
-</table>
-
-<ul>
-    <li><button id="place_minesweeper">Place Minesweeper</button></li>
-    <li><button id="place_destroyer">Place Destroyer</button></li>
-    <li><button id="place_battleship">Place Battleship</button></li>
-    <li><input type="checkbox" id="is_vertical">Vertical</input></li>
-</ul>
+<div id="ships">
+    <h1 id="place_ships">Place your Ships</h1>
+    <h2 id="minesweeper">Minesweeper</h2>
+    <button id="place_minesweeper"><img src= "/../../assets/css/minesweeper.png" ></button>
+    <h2 id="destroyer">Destroyer</h2>
+    <button id="place_destroyer"> <img src= "/../../assets/css/destroyer.png" ></button>
+    <h2 id="battleship">Battleship</h2>
+    <button id="place_battleship"><img src= "/../../assets/css/battleship.png" ></button>
+    <input type="checkbox" id="is_vertical">Vertical</input>
+</div>
 
 <script type="text/javascript" src="/assets/game.js"></script>
 <script>
