@@ -7,11 +7,16 @@ body{
     font-style: normal;
     color: white;
     background-image: url(ocean.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 #title{
     position: relative;
     left: 24%;
     margin: 6px;
+    font-size: 32px;
+    width: 700px
 }
 #place_minesweeper{
     background: rgba(100, 100, 100, 0);
@@ -74,18 +79,32 @@ table{
     width: 32px;
 }
 
-td:hover {
-    background-color: ghostwhite;
+.placed_minesweeper{
+    background-color: yellow;
+}
+.placed_destroyer{
+    background-color: purple;
+}
+.placed_battleship{
+    background-color: aqua;
 }
 
-.placed {
-    background-color: ghostwhite;
+.hover_minesweeper:hover{
+    background-color: yellow;
+}
+.hover_destroyer:hover{
+    background-color: purple;
+}
+.hover_battleship:hover{
+    background-color: aqua;
 }
 
 .occupied {
     background-color: ghostwhite;
 }
-
+td:hover {
+    background-color: ghostwhite;
+}
 .hit {background: rgba(0, 255, 0, 0.65);
 }
 

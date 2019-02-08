@@ -119,7 +119,18 @@ function place(size) {
                 // ship is over the edge; let the back end deal with it
                 break;
             }
-            cell.classList.toggle("placed");
+            if (size == 2){
+                cell.classList.toggle("placed_minesweeper");
+                cell.classList.toggle("hover_minesweeper");
+            }
+            else if (size == 3){
+                cell.classList.toggle("placed_destroyer");
+                cell.classList.toggle("hover_destroyer");
+            }
+            else if (size == 4){
+                cell.classList.toggle("placed_battleship");
+                cell.classList.toggle("hover_battleship");
+            }
         }
     }
 }
