@@ -70,6 +70,9 @@ function cellClick() {
             game = data;
             redrawGrid();
             placedShips++;
+            document.getElementsByClassName("cancel")[0].style.opacity = 0;
+            document.getElementsByClassName("cancel")[1].style.opacity = 0;
+            document.getElementsByClassName("cancel")[2].style.opacity = 0;
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
@@ -122,6 +125,7 @@ function place(size) {
             if (size == 2){
                 cell.classList.toggle("placed_minesweeper");
                 cell.classList.toggle("hover_minesweeper");
+
             }
             else if (size == 3){
                 cell.classList.toggle("placed_destroyer");
@@ -140,14 +144,17 @@ function initGame() {
     makeGrid(document.getElementById("player"), true);
     document.getElementById("place_minesweeper").addEventListener("click", function(e) {
         shipType = "MINESWEEPER";
+        document.getElementById("c1").style.opacity = 1;
        registerCellListener(place(2));
     });
     document.getElementById("place_destroyer").addEventListener("click", function(e) {
         shipType = "DESTROYER";
+        document.getElementById("c2").style.opacity = 1;
        registerCellListener(place(3));
     });
     document.getElementById("place_battleship").addEventListener("click", function(e) {
         shipType = "BATTLESHIP";
+        document.getElementById("c3").style.opacity = 1;
        registerCellListener(place(4));
     });
     sendXhr("GET", "/game", {}, function(data) {
