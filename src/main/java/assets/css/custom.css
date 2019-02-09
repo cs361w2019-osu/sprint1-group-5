@@ -47,6 +47,12 @@ body{
 #battleship{
     margin-left: 50px;
 }
+
+.cancel{
+    margin-left: 300px;
+    opacity:0;
+}
+
 button{
     border: none;
     display: block;
