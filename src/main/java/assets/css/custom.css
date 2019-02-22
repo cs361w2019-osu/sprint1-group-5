@@ -1,16 +1,25 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
+html{
+    background: url(ocean.png) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
 
 body{
     font-family: stencil-std, sans-serif;
     font-weight: 400;
     font-style: normal;
     color: white;
-    background-image: url(ocean.png);
+  /**  background-image: url(ocean.png);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center center;**/
+
 }
+
 #sonar
 {
     position: relative;
@@ -25,6 +34,22 @@ body{
 #sonar:hover
 {
     color:red;
+}
+
+.hover_sonar
+{
+    background-color: red;
+    opacity: 0.6;
+}
+
+.sonar_empty
+{
+    background-color: gray;
+}
+
+.sonar_occupied
+{
+    background-color:black;
 }
 
 #title{

@@ -3,7 +3,9 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
-var shipsHit = 0;
+var sonarUse = 0;
+var sonarMode = false;
+var sonarSpot;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -14,6 +16,15 @@ function makeGrid(table, isPlayer) {
             row.appendChild(column);
         }
         table.appendChild(row);
+    }
+}
+
+function sonar()
+{
+    if (sonarUse < 3)
+    {
+        sonarMode = true;
+        sonarUse++;
     }
 }
 
@@ -29,10 +40,7 @@ function markHits(board, elementId, surrenderText) {
             className = "hit";
             //if ship sunk, make sonar available
             document.getElementById("sonar").style.opacity=1;
-            document.getElementById("sonar").addEventListener("click", function(e) {
-               //sonar functionality
-             });
-
+            document.getElementById("sonar").addEventListener("click", sonar);
          }
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
@@ -48,12 +56,12 @@ function redrawGrid() {
     if (game === undefined) {
         return;
     }
+        game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+            document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+        }));
+        markHits(game.opponentsBoard, "opponent", "You won the game");
+        markHits(game.playersBoard, "player", "You lost the game");
 
-    game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
-        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
-    }));
-    markHits(game.opponentsBoard, "opponent", "You won the game");
-    markHits(game.playersBoard, "player", "You lost the game");
 }
 
 var oldListener;
@@ -87,7 +95,33 @@ function cellClick() {
                 registerCellListener((e) => {});
             }
         });
-    } else {
+    }
+    //if we click cell while using sonar...
+  else if (sonarMode == true)
+    {
+        var ships = 3;
+
+        for (var i = 0; i < 3; i++)
+        {
+            shipSquares = game.opponentsBoard.ships[i].occupiedSquares.length;
+            for (var s = 0; s < shipSquares; s++)
+            {
+                var square = game.opponentsBoard.ships[i].occupiedSquares[s];
+                var shipRow = square.row;
+                var shipCol = square.column;
+                if (shipRow == row && shipCol == col)
+                {
+                     document.getElementById("opponent").rows[shipRow-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
+                     alert("FOUND!");
+                }
+                else
+                    alert("NOTHING");
+            }
+        }
+        sonarMode = false;
+    }
+    else
+    {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
