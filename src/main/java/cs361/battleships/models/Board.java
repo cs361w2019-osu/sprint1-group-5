@@ -45,9 +45,29 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
+		var attackLocation = new Square(x,y);
+		//System.out.println("SHIPS: " + this.ships.get(0).getOccupiedSquares().get(0));
 		Result attackResult = attack(new Square(x, y));
-		attacks.add(attackResult);
-		return attackResult;
+		int cap0 = ships.get(0).getCap();
+		int cap1 = ships.get(1).getCap();
+		int cap2 = ships.get(2).getCap();
+		if(this.ships.get(0).getOccupiedSquares().get(cap0).equals(attackLocation) && !this.ships.get(0).getOccupiedSquares().get(cap0).isHit()){
+			System.out.println("NO ATTACK 1: " + attackResult);
+			return attackResult;
+		}
+		else if(this.ships.get(1).getOccupiedSquares().get(cap1).equals(attackLocation) && !this.ships.get(1).getOccupiedSquares().get(cap1).isHit()){
+			System.out.println("NO ATTACK 2: " + attackResult);
+			return attackResult;
+		}
+		else if(this.ships.get(2).getOccupiedSquares().get(cap2).equals(attackLocation) && !this.ships.get(2).getOccupiedSquares().get(cap2).isHit()){
+			System.out.println("NO ATTACK 3: " + attackResult);
+			return attackResult;
+		}
+		else {
+			System.out.println("ATTACK RECORDED: " + attackResult);
+			attacks.add(attackResult);
+			return attackResult;
+		}
 	}
 
 	private Result attack(Square s) {
