@@ -15,6 +15,8 @@ public class Ship {
 	@JsonProperty private String kind;
 	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private int size;
+	private int cap;
+	private int cap_health;
 
 	public Ship() {
 		occupiedSquares = new ArrayList<>();
@@ -26,15 +28,30 @@ public class Ship {
 		switch(kind) {
 			case "MINESWEEPER":
 				size = 2;
+				this.cap = 0;
+				this.cap_health = 0;
 				break;
 			case "DESTROYER":
 				size = 3;
+				this.cap = 1;
+				this.cap_health = 1;
 				break;
 			case "BATTLESHIP":
 				size = 4;
+				this.cap = 2;
+				this.cap_health = 1;
 				break;
 		}
 	}
+
+	public int getCap() {
+		return this.cap;
+	}
+
+	public int getCap_health() {
+		return this.cap_health;
+	}
+
 
 	public List<Square> getOccupiedSquares() {
 		return occupiedSquares;
@@ -61,6 +78,12 @@ public class Ship {
 		return getOccupiedSquares().stream().anyMatch(s -> s.equals(location));
 	}
 
+	public void set_cap_health(int cap_health){
+		System.out.println("SETTER: " + cap_health);
+		this.cap_health = cap_health;
+		System.out.println("SETTER POST: " + this.cap_health);
+	}
+
 	public String getKind() {
 		return kind;
 	}
@@ -77,11 +100,39 @@ public class Ship {
 			result.setResult(AtackStatus.INVALID);
 			return result;
 		}
+		if(this.getOccupiedSquares().get(cap).equals(attackedLocation)){
+			System.out.println("In IF cap_health: " + this.cap_health);
+
+			if(this.cap_health > 0){
+				System.out.println("In CASE: " + this.cap_health);
+				var result = new Result(attackedLocation);
+				result.setResult(AtackStatus.CAPTAIN);
+				this.set_cap_health(0);
+				return result;
+			}
+			else {
+				var result = new Result(attackedLocation);
+				attackedSquare.hit();
+				result.setResult(AtackStatus.SUNK);
+				for(int i = 0; i < this.getOccupiedSquares().size(); i++) {
+					if(this.getOccupiedSquares().get(i).isHit() == false) {
+						int tempX = this.getOccupiedSquares().get(i).getRow();
+						char tempY = this.getOccupiedSquares().get(i).getColumn();
+						this.attack(tempX, tempY);
+					}
+				}
+				return result;
+			}
+		}
+
 		attackedSquare.hit();
 		var result = new Result(attackedLocation);
 		result.setShip(this);
 		if (isSunk()) {
+			//for(int i = 0; i < this.getOccupiedSquares().size(); i++) {
+			//	var tempResult = new Result(this.getOccupiedSquares().get(i));
 			result.setResult(AtackStatus.SUNK);
+			//	}
 		} else {
 			result.setResult(AtackStatus.HIT);
 		}
