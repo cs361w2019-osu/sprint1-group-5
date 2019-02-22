@@ -3,6 +3,7 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var shipsHit = 0;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -24,7 +25,15 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "HIT")
             className = "hit";
         else if (attack.result === "SUNK")
-            className = "hit"
+        {
+            className = "hit";
+            //if ship sunk, make sonar available
+            document.getElementById("sonar").style.opacity=1;
+            document.getElementById("sonar").addEventListener("click", function(e) {
+               //sonar functionality
+             });
+
+         }
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
