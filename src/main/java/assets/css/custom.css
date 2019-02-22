@@ -11,6 +11,16 @@ body{
     background-repeat: no-repeat;
     background-position: center center;
 }
+#sonar
+{
+    position: relative;
+    float: right;
+    width: 50px;
+    margin-top: -400px;
+    margin-right: 200px;
+    font-size: 28px;
+}
+
 #title{
     position: relative;
     left: 24%;
