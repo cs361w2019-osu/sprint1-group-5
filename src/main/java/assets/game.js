@@ -20,10 +20,15 @@ function makeGrid(table, isPlayer) {
 
 function sonar()
 {
-    if (sonarUse < 3)
+    if (sonarUse < 2)
     {
         sonarMode = true;
         sonarUse++;
+    }
+    else
+    {
+        document.getElementById("sonar").style.opacity=0;
+        document.getElementById("sonar").removeEventListener("click", sonar);
     }
 }
 
@@ -39,8 +44,9 @@ function markHits(board, elementId, surrenderText) {
             console.log("HIT!");
             className = "hit";
             //if ship sunk, make sonar available
-            document.getElementById("sonar").style.opacity=1;
-            document.getElementById("sonar").addEventListener("click", sonar);
+            if (sonarUse < 2)
+           { document.getElementById("sonar").style.opacity=1;
+            document.getElementById("sonar").addEventListener("click", sonar);}
          }
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
@@ -103,7 +109,7 @@ function cellClick() {
         var oSquare;
         console.log(row);
         console.log(col);
-
+        var found = false;
 
         //for all three ships opponent has
         for (var i = 0; i < 3; i++)
@@ -112,29 +118,33 @@ function cellClick() {
             //for all the opponent's occupied squares
             for (var s = 0; s < shipSquares; s++)
             {
-                var found = false;
+
                 var square = game.opponentsBoard.ships[i].occupiedSquares[s];
                 oSquare = square;
                 var shipRow = square.row;
+                console.log("SHIP");
+                console.log(shipRow);
+                console.log(shipCol);
                 var shipCol = square.column;
                 //check if the clicked square matches one of the occupied squares
                 if (shipRow == row && shipCol == col)
                 {
                      found = true;
-                     break;
                 }
-            }
 
-            //change square's color depending on if the square is occupied
-            if (found = true)
-            {
-                document.getElementById("opponent").rows[row-1].cells[oSquare.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
             }
-            else
-                document.getElementById("opponent").rows[row-1].cells[oSquare.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_empty");
-
-            console.log(oSquare.column);
+            console.log("STATUS:");
+            console.log(found);
         }
+        //change square's color depending on if the square is occupied
+        if (found == true)
+                    {
+                        document.getElementById("opponent").rows[row-1].cells[col.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
+                    }
+          else
+                        document.getElementById("opponent").rows[row-1].cells[col.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_empty");
+
+
         sonarMode = false;
     }
     else
