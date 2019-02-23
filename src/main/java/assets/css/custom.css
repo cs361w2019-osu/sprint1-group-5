@@ -155,11 +155,14 @@ td:hover {
 .hit {background: rgba(0, 255, 0, 0.65);
 }
 
-.sink {
-    background: rgba(0,0,255,.5);
+.sunk {
+    background: rgba(0,0,0,.85);
 }
 
 .miss {
     background: rgba(255,0,0,.65);
+}
+.captain{
+    background: rgba(0,0,255,.65);
 }
 footer{opacity: 0}

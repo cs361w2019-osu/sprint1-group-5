@@ -42,12 +42,15 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "SUNK")
         {
             console.log("HIT!");
-            className = "hit";
+            //className = "hit";
             //if ship sunk, make sonar available
             if (sonarUse < 2)
            { document.getElementById("sonar").style.opacity=1;
             document.getElementById("sonar").addEventListener("click", sonar);}
+            className = "sunk";
          }
+        else if (attack.result === "CAPTAIN")
+            className = "captain";
         else if (attack.result === "SURRENDER")
             alert(surrenderText);
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
@@ -168,6 +171,7 @@ function sendXhr(method, url, data, handler) {
     req.open(method, url);
     req.setRequestHeader("Content-Type", "application/json");
     req.send(JSON.stringify(data));
+    console.log(data)
 }
 
 function place(size) {
