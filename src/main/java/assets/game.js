@@ -5,7 +5,6 @@ var shipType;
 var vertical;
 var sonarUse = 0;
 var sonarMode = false;
-var sonarSpot;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -37,6 +36,7 @@ function markHits(board, elementId, surrenderText) {
             className = "hit";
         else if (attack.result === "SUNK")
         {
+            console.log("HIT!");
             className = "hit";
             //if ship sunk, make sonar available
             document.getElementById("sonar").style.opacity=1;
@@ -100,23 +100,40 @@ function cellClick() {
   else if (sonarMode == true)
     {
         var ships = 3;
+        var oSquare;
+        console.log(row);
+        console.log(col);
 
+
+        //for all three ships opponent has
         for (var i = 0; i < 3; i++)
         {
             shipSquares = game.opponentsBoard.ships[i].occupiedSquares.length;
+            //for all the opponent's occupied squares
             for (var s = 0; s < shipSquares; s++)
             {
+                var found = false;
                 var square = game.opponentsBoard.ships[i].occupiedSquares[s];
+                oSquare = square;
                 var shipRow = square.row;
                 var shipCol = square.column;
+                //check if the clicked square matches one of the occupied squares
                 if (shipRow == row && shipCol == col)
                 {
-                     document.getElementById("opponent").rows[shipRow-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
-                     alert("FOUND!");
+                     found = true;
+                     break;
                 }
-                else
-                    alert("NOTHING");
             }
+
+            //change square's color depending on if the square is occupied
+            if (found = true)
+            {
+                document.getElementById("opponent").rows[row-1].cells[oSquare.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
+            }
+            else
+                document.getElementById("opponent").rows[row-1].cells[oSquare.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_empty");
+
+            console.log(oSquare.column);
         }
         sonarMode = false;
     }
