@@ -69,12 +69,17 @@ body{
 }
 #place_battleship{
     background: rgba(100, 100, 100, 0);
+    margin-left: -40pX;
+}
+#place_sub{
+    background: rgba(100, 100, 100, 0);
     margin-left: -40px;
 }
 #ships{
     position: absolute;
-    left: 55%;
+    left: 60%;
     bottom: 15%;
+    top: -2%;
 }
 #place_ships{
     margin-left: -30px;
@@ -86,6 +91,10 @@ body{
     margin-left: 48px;
 }
 #battleship{
+    margin-left: 50px;
+}
+
+#sub{
     margin-left: 50px;
 }
 
