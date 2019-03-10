@@ -47,6 +47,8 @@ function markHits(board, elementId, surrenderText) {
             if (sonarUse < 2)
            { document.getElementById("sonar").style.opacity=1;
             document.getElementById("sonar").addEventListener("click", sonar);}
+            //alert player that space laser has been activated
+            alert("Space Laser has been unlocked and is now the default weapon! Now able to sink submarines.")
             className = "sunk";
          }
         else if (attack.result === "CAPTAIN")
