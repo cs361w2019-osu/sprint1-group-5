@@ -3,6 +3,8 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var sonarUse = 0;
+var sonarMode = false;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -16,6 +18,20 @@ function makeGrid(table, isPlayer) {
     }
 }
 
+function sonar()
+{
+    if (sonarUse < 2)
+    {
+        sonarMode = true;
+        sonarUse++;
+    }
+    else
+    {
+        document.getElementById("sonar").style.opacity=0;
+        document.getElementById("sonar").removeEventListener("click", sonar);
+    }
+}
+
 function markHits(board, elementId, surrenderText) {
     board.attacks.forEach((attack) => {
         let className;
@@ -24,7 +40,15 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "HIT")
             className = "hit";
         else if (attack.result === "SUNK")
+        {
+            console.log("HIT!");
+            //className = "hit";
+            //if ship sunk, make sonar available
+            if (sonarUse < 2)
+           { document.getElementById("sonar").style.opacity=1;
+            document.getElementById("sonar").addEventListener("click", sonar);}
             className = "sunk";
+         }
         else if (attack.result === "CAPTAIN")
             className = "captain";
         else if (attack.result === "SURRENDER")
@@ -41,12 +65,12 @@ function redrawGrid() {
     if (game === undefined) {
         return;
     }
+        game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+            document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+        }));
+        markHits(game.opponentsBoard, "opponent", "You won the game");
+        markHits(game.playersBoard, "player", "You lost the game");
 
-    game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
-        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
-    }));
-    markHits(game.opponentsBoard, "opponent", "You won the game");
-    markHits(game.playersBoard, "player", "You lost the game");
 }
 
 var oldListener;
@@ -80,7 +104,54 @@ function cellClick() {
                 registerCellListener((e) => {});
             }
         });
-    } else {
+    }
+    //if we click cell while using sonar...
+  else if (sonarMode == true)
+    {
+        var ships = 3;
+        var oSquare;
+        console.log(row);
+        console.log(col);
+        var found = false;
+
+        //for all three ships opponent has
+        for (var i = 0; i < 3; i++)
+        {
+            shipSquares = game.opponentsBoard.ships[i].occupiedSquares.length;
+            //for all the opponent's occupied squares
+            for (var s = 0; s < shipSquares; s++)
+            {
+
+                var square = game.opponentsBoard.ships[i].occupiedSquares[s];
+                oSquare = square;
+                var shipRow = square.row;
+                console.log("SHIP");
+                console.log(shipRow);
+                console.log(shipCol);
+                var shipCol = square.column;
+                //check if the clicked square matches one of the occupied squares
+                if (shipRow == row && shipCol == col)
+                {
+                     found = true;
+                }
+
+            }
+            console.log("STATUS:");
+            console.log(found);
+        }
+        //change square's color depending on if the square is occupied
+        if (found == true)
+                    {
+                        document.getElementById("opponent").rows[row-1].cells[col.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_occupied");
+                    }
+          else
+                        document.getElementById("opponent").rows[row-1].cells[col.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sonar_empty");
+
+
+        sonarMode = false;
+    }
+    else
+    {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
