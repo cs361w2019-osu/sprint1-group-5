@@ -20,13 +20,53 @@ body{
 
 }
 
+#moveFleet
+{
+    margin-left: 80px;
+    margin-top: 280px;
+    position: absolute;
+    opacity: 0;
+}
+
+#cText
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.direction
+{
+    font-size: 50px;
+    color: red;
+    font-weight: bold;
+    align-text: center;
+}
+
+.direction:hover
+{
+    color: white;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 #sonar
 {
     position: relative;
     float: right;
     width: 50px;
     margin-top: -400px;
-    margin-right: 200px;
+    margin-right: 100px;
     font-size: 28px;
     opacity: 0;
 }
@@ -52,9 +92,10 @@ body{
     background-color:black;
 }
 
+
 #title{
     position: relative;
-    left: 24%;
+    left: 23%;
     margin: 6px;
     font-size: 32px;
     width: 700px
@@ -69,12 +110,18 @@ body{
 }
 #place_battleship{
     background: rgba(100, 100, 100, 0);
+    margin-left: -40pX;
+}
+#place_sub{
+    background: rgba(100, 100, 100, 0);
     margin-left: -40px;
+    margin-top: -25px;
 }
 #ships{
     position: absolute;
-    left: 55%;
+    left: 60%;
     bottom: 15%;
+    top: -2%;
 }
 #place_ships{
     margin-left: -30px;
@@ -86,6 +133,10 @@ body{
     margin-left: 48px;
 }
 #battleship{
+    margin-left: 50px;
+}
+
+#sub{
     margin-left: 50px;
 }
 
@@ -102,7 +153,7 @@ button{
     border: 1px solid black;
     border-spacing: 0px;
     position: relative;
-    left: 25%;
+    left: 24%;
 }
 #opponent{
     margin-bottom: 5px;

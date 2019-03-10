@@ -5,6 +5,8 @@ var shipType;
 var vertical;
 var sonarUse = 0;
 var sonarMode = false;
+var sunk = 0;
+var moveUse = 0;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -47,7 +49,13 @@ function markHits(board, elementId, surrenderText) {
             if (sonarUse < 2)
            { document.getElementById("sonar").style.opacity=1;
             document.getElementById("sonar").addEventListener("click", sonar);}
+            //alert player that space laser has been activated
+            alert("Space Laser has been unlocked and is now the default weapon! Now able to sink submarines.")
             className = "sunk";
+            //unlock moving fleet if at least 2 have been sunk
+            sunk++;
+            if (sunk > 1)
+                document.getElementById("moveFleet").style.opacity=1;
          }
         else if (attack.result === "CAPTAIN")
             className = "captain";
